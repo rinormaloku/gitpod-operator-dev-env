@@ -1,7 +1,9 @@
-FROM debian:stable
+FROM gitpod/workspace-full:latest
 
-RUN apt-get update
-RUN apt-get -y install \
+USER gitpod
+
+RUN sudo apt-get update
+RUN sudo apt-get -y install \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -22,10 +24,10 @@ RUN cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-
 
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 
-RUN add-apt-repository \
+RUN sudo add-apt-repository \
    "deb [arch=amd64] https://download.docker.com/linux/debian \
    $(lsb_release -cs) \
    stable"
 
-RUN apt-get update
-RUN apt-get -y install docker-ce docker-ce-cli containerd.io
+RUN sudo apt-get update
+RUN sudo apt-get -y install docker-ce docker-ce-cli containerd.io
