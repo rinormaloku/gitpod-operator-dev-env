@@ -1,8 +1,14 @@
-FROM centos:centos8
+FROM debian:stable
 
-RUN yum -y install wget
+RUN apt-get update
+RUN apt-get -y install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg-agent \
+    software-properties-common
 
-RUN wget https://golang.org/dl/go1.15.6.linux-amd64.tar.gz && \
+RUN curl -OJL https://golang.org/dl/go1.15.6.linux-amd64.tar.gz && \
   tar -C /usr/local -xzf go1.15.6.linux-amd64.tar.gz
 
 ENV PATH=$PATH:/usr/local/go/bin
@@ -11,11 +17,14 @@ RUN go version
 
 ARG RELEASE_VERSION=v0.19.4
 
-RUN curl -OJL https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu && \
-  chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu && \
-  cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk && \
-  rm operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
 
-RUN yum install -y yum-utils && yum-config-manager --add-repo \
-    https://download.docker.com/linux/centos/docker-ce.repo && \
-    yum -y install docker-ce docker-ce-cli containerd.io
+RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
+
+RUN add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/debian \
+   $(lsb_release -cs) \
+   stable"
+
+RUN apt-get update
+RUN apt-get -y install docker-ce docker-ce-cli containerd.io
+
