@@ -1,5 +1,6 @@
 FROM debian:stable
 
+USER gitpod
 RUN apt-get update
 RUN apt-get -y install \
     apt-transport-https \
@@ -15,9 +16,6 @@ ENV PATH=$PATH:/usr/local/go/bin
 
 RUN go version
 
-ARG RELEASE_VERSION=v0.19.4
-
-
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 
 RUN add-apt-repository \
@@ -25,6 +23,12 @@ RUN add-apt-repository \
    $(lsb_release -cs) \
    stable"
 
+ARG RELEASE_VERSION=v0.19.4
+RUN curl -OJL https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+RUN chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
+RUN cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk
+
 RUN apt-get update
 RUN apt-get -y install docker-ce docker-ce-cli containerd.io
 
+USER root
