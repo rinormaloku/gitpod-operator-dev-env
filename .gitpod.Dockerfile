@@ -1,4 +1,4 @@
-FROM FROM gitpod/workspace-full:latest
+FROM gitpod/workspace-full:latest
 
 USER gitpod
 RUN apt-get update
