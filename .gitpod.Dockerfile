@@ -30,7 +30,7 @@ RUN sudo apt -y install docker-ce
 
 ARG VERSION_ID="20.04"
 
-RUN echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /” | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+RUN echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /" | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
 RUN curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
 RUN sudo apt-get update
 RUN sudo apt-get -y upgrade
