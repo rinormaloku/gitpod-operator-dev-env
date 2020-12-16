@@ -22,5 +22,8 @@ RUN curl -OJL https://github.com/operator-framework/operator-sdk/releases/downlo
 RUN chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
 RUN sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk
 
-RUN sudo apt-get update
-RUN sudo apt-get -y install podman
+RUN source /etc/os-release
+RUN sudo sh -c "echo 'deb http://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /' > /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list"
+RUN wget -nv https://download.opensuse.org/repositories/devel:kubic:libcontainers:stable/xUbuntu_${VERSION_ID}/Release.key -O- | sudo apt-key add -
+RUN sudo apt-get update -qq
+RUN sudo apt-get -qq --yes install podman
