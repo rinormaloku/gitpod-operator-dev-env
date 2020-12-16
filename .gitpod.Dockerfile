@@ -20,7 +20,7 @@ RUN go version
 ARG RELEASE_VERSION=v0.19.4
 RUN curl -OJL https://github.com/operator-framework/operator-sdk/releases/download/${RELEASE_VERSION}/operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
 RUN chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
-RUN cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk
+RUN sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk
 
 RUN curl -fsSL https://download.docker.com/linux/debian/gpg | apt-key add -
 
