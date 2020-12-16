@@ -35,6 +35,7 @@ RUN curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontaine
 RUN sudo apt-get update
 RUN sudo apt-get -y upgrade
 RUN sudo apt-get -y install podman
+RUN sudo chmod 777 /usr/bin/podman
 
 
 RUN sudo apt-get update && sudo apt-get install -y apt-transport-https gnupg2 curl
