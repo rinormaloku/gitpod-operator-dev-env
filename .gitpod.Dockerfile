@@ -1,5 +1,7 @@
 FROM gitpod/workspace-full:latest
 
+USER root
+
 RUN apt-get update
 RUN apt-get -y install \
     apt-transport-https \
