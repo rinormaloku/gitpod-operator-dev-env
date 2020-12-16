@@ -22,12 +22,5 @@ RUN curl -OJL https://github.com/operator-framework/operator-sdk/releases/downlo
 RUN chmod +x operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu
 RUN sudo cp operator-sdk-${RELEASE_VERSION}-x86_64-linux-gnu /usr/local/bin/operator-sdk
 
-RUN curl -fsSL https://download.docker.com/linux/debian/gpg | sudo apt-key add -
-
-RUN sudo add-apt-repository \
-   "deb [arch=amd64] https://download.docker.com/linux/debian \
-   $(lsb_release -cs) \
-   stable"
-
 RUN sudo apt-get update
-RUN sudo apt-get -y install docker-ce docker-ce-cli containerd.io
+RUN sudo apt-get -y install podman
