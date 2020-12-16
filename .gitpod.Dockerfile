@@ -28,3 +28,10 @@ RUN sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/
 RUN sudo apt update
 RUN sudo apt -y install docker-ce
 
+ARG VERSION_ID="20.04"
+
+RUN echo "deb https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/ /” | sudo tee /etc/apt/sources.list.d/devel:kubic:libcontainers:stable.list
+RUN curl -L https://download.opensuse.org/repositories/devel:/kubic:/libcontainers:/stable/xUbuntu_${VERSION_ID}/Release.key | sudo apt-key add -
+RUN sudo apt-get update
+RUN sudo apt-get -y upgrade
+RUN sudo apt-get -y install podman
